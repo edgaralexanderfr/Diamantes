@@ -16,3 +16,4 @@ void pc();
 void ganar();
 void guardar();
 void mostrar_tablero(int tipo_juego);
+void cls();

@@ -20,14 +20,15 @@ void guardar () {
 
 void mostrar_tablero (int tipo_juego) {
 	// Preguntamos y validamos la dimensión
-	system("cls");
+	cls();
 	int dimension;
 	printf("Dimension: ");
 	scanf("%i", &dimension);
+	getchar();
 	
 	if (dimension < 4) {
 		printf("El tablero debe poseer una dimension superior o igual a 4.\n");
-		system("pause");
+		getchar();
 
 		return;
 	}
@@ -49,7 +50,7 @@ void mostrar_tablero (int tipo_juego) {
 
 	while (1) {
 		// Mostramos el estado
-		system("cls");
+		cls();
 
 		for (y = 0; y <= dimension; y++) {
 			for (x = 0; x <= dimension; x++) {
@@ -69,6 +70,7 @@ void mostrar_tablero (int tipo_juego) {
 		// Pedimos la casilla y procesamos la lógica
 		printf("\nFila: ");
 		scanf("%i", &fila);
+		getchar();
 
 		if (fila == 0) {
 			
@@ -79,16 +81,26 @@ void mostrar_tablero (int tipo_juego) {
 
 		printf("Columna: ");
 		scanf("%i", &columna);
+		getchar();
 
 		if (fila < 1 || columna < 1 || fila > dimension || columna > dimension) {
 			printf("\nCasilla invalida.\n");
-			system("pause");
+			getchar();
 
 			continue;
 		}
 
 		// TODO: agregar lógica aquí...
 	}
+}
+
+void cls () {
+	// Para borrar la pantalla en Windows y Linux
+	#ifdef WINDOWS
+	system("cls");
+	#else
+	printf("\033[H\033[J");
+	#endif
 }
 
 int main () {
