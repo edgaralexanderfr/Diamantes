@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "diamantes.h"
 
 void jugador () {
@@ -34,8 +35,10 @@ void mostrar_tablero (int tipo_juego) {
 	}
 
 	// Llenamos los valores iniciales de las casillas
+	int ultimo = dimension - 1;
 	int casillas[ dimension ][ dimension ];
 	int x, y;
+	srand(time(NULL));
 
 	for (y = 0; y < dimension; y++) {
 		for (x = 0; x < dimension; x++) {
@@ -90,7 +93,30 @@ void mostrar_tablero (int tipo_juego) {
 			continue;
 		}
 
-		// TODO: agregar lógica aquí...
+		// Comprobamos la casilla y sus vecinos y barremos de arriba a abajo
+		int casilla_y = fila - 1;
+		int casilla_x = columna - 1;
+		int numero = casillas[ casilla_y ][ casilla_x ];
+		int by;
+		f = casilla_y + 1;
+		c = casilla_x + 1;
+
+		for (y = casilla_y - 1; y <= f; y++) {
+			for (x = casilla_x - 1; x <= c; x++) {
+				if (x < 0 || y < 0 || x > ultimo || y > ultimo) {
+					continue;
+				}
+
+				if (casillas[ y ][ x ] == 0 || casillas[ y ][ x ] != numero) {
+					continue;
+				}
+
+				// Barremos la columna hacia abajo
+				for (by = y - 1; by >= -1; by--) {
+					casillas[ by + 1 ][ x ] = (by < 0) ? 0 : casillas[ by ][ x ] ;
+				}
+			}
+		}
 	}
 }
 
