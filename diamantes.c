@@ -96,7 +96,7 @@ void mostrar_tablero (int tipo_juego) {
 
 void cls () {
 	// Para borrar la pantalla en Windows y Linux
-	#ifdef WINDOWS
+	#ifdef _WIN32
 	system("cls");
 	#else
 	printf("\033[H\033[J");
